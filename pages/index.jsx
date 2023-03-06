@@ -10,7 +10,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1 className='py-10 text-3xl text-center'>University of Amsterdam</h1>
+      <h1 className='py-10 text-3xl text-center text-cyan-600'>University of Amsterdam</h1>
     </>
   )
 }
