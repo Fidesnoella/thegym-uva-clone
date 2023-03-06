@@ -174,15 +174,15 @@ export default function Navbar() {
                 </div>
             )}
             {showmenu && (
-                <div className="relative z-[99999] bg-[#d6d6d6] top-20">
+                <div className="relative z-[99999] bg-[#d6d6d6] top-20 cursor-pointer">
                     <div className="px-[0.625rem] xl:px-2 py-6 mx-auto container max-w-none xl:max-w-[87.5rem] w-full">
                         <h1 className="flex gap-1 text-[#bd0032] border-b border-white"><Image src={arrow} width={20} />Home</h1>
-                        <div className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-3 cursor-pointer">
                             {
                                 ["Eduaction", "Research", "News&&Event", "About the UvA", "Library"].map((item, index) => {
                                     return (
-                                        <div className="flex border-b border-white hover:text-[#bd0032] hover:underline py-4" key={index}>
-                                            <span className="bg-white">
+                                        <div className="flex border-b gap-2 border-white hover:text-[#bd0032] hover:underline py-4 gap-2 cursor-pointer" key={index}>
+                                            <span className="bg-white p-2">
                                                 <Image src={chevron} width={20} />
                                             </span>
                                             <span>{item}</span>
