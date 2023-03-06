@@ -8,6 +8,9 @@ import search from "../../public/assets/search-gray.svg"
 import heart from "../../public/assets/heart.svg"
 import language from "../../public/assets/language.svg"
 import menu from "../../public/assets/menu.svg"
+import xcross from "../../public/assets/xcross.svg"
+import arrow from "../../public/assets/arrow.svg"
+import chevron from "../../public/assets/chevron-black.svg"
 
 const sourceSans = localFont({
     src: [
@@ -33,6 +36,8 @@ export default function Navbar() {
     const [research, setResearch] = useState(0);
     const [event, setEvent] = useState(0);
     const [about, setAbout] = useState(0);
+    const [showsearch, setShowSearch] = useState(false);
+    const [showmenu, setShowMenu] = useState(false)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -79,21 +84,21 @@ export default function Navbar() {
                                 <p className='text-[#1f1d20] flex-nowrap group-hover:underline group-hover:underline-offset-4 text-[1rem] font-semibold leading-[1rem]  hidden sm:block'>Compare programmes</p>
                                 <Image src={heart} className="overflow-hidden" />
                             </div>
-                            <div className='border border-[#1f1d21] p-2'>
-                                <Image src={search} />
+                            <div className='border border-[#1f1d21] p-2' onClick={() => setShowSearch(!showsearch)}>
+                                <Image src={search} onClick={() => setShowSearch(!showsearch)} />
                             </div>
                             <div className='border border-[#1f1d21] p-2'>
                                 <Image src={language} />
                             </div>
-                            <div className="bg-black rounded-sm hover:bg-opacity-80 flex items-center px-2 gap-1">
-                                <span className="text-white hidden sm:block">Menu</span>
-                                <Image src={menu} width={20} />
+
+                            <div className="bg-black rounded-sm hover:bg-opacity-80 flex items-center px-2 gap-1" onClick={() => setShowMenu(!showmenu)}>
+                                {showmenu ? <div className='flex gap-2 items-center text-white'>Menu<Image src={xcross} className="w-5" /></div> : <><span className="text-white hidden sm:block">Menu</span><Image src={menu} width={20} onClick={() => setShowMenu(!showmenu)} /></>}
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div className='hidden lg:block shadow-7xl bg-[#f5f5f5] pt-[5.75rem] cursor-pointer'>
                 <div className="px-[0.625rem] xl:px-2 mx-auto container max-w-none xl:max-w-[87.5rem] text-[#1f1d21]">
                     <div className="flex gap-8 text-[1.25rem] leading-[2rem] font-normal py-2">
@@ -153,6 +158,45 @@ export default function Navbar() {
                     </div>
                 </div>
             </div>
+            {showsearch && (
+                <div className="shadow-7xl bg-white relative z-[99999]">
+                    <div className="px-[0.625rem] xl:px-2 py-6 mx-auto container max-w-none xl:max-w-[87.5rem] w-full">
+                        <div className="flex w-full gap-2">
+                            <div className='flex relative w-full'>
+                                <input type="text" className='w-full rounded-md placeholder-[#575757] border border-black py-2 px-2 outline-1 outline-black ' placeholder='Search...' />
+                                <Image src={search} className="absolute right-2 top-2 border-l p-1 w-8" />
+                            </div>
+                            <div className="bg-black rounded-sm hover:bg-opacity-80 flex items-center px-2 gap-1" onClick={() => setShowSearch(!showsearch)}>
+                                <Image src={xcross} width={20} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {showmenu && (
+                <div className="relative z-[99999] bg-[#d6d6d6] top-20">
+                    <div className="px-[0.625rem] xl:px-2 py-6 mx-auto container max-w-none xl:max-w-[87.5rem] w-full">
+                        <h1 className="flex gap-1 text-[#bd0032] border-b border-white"><Image src={arrow} width={20} />Home</h1>
+                        <div className="flex flex-col gap-3">
+                            {
+                                ["Eduaction", "Research", "News&&Event", "About the UvA", "Library"].map((item, index) => {
+                                    return (
+                                        <div className="flex border-b border-white hover:text-[#bd0032] hover:underline py-4" key={index}>
+                                            <span className="bg-white">
+                                                <Image src={chevron} width={20} />
+                                            </span>
+                                            <span>{item}</span>
+                                        </div>
+                                    )
+                                })
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            )
+            }
+
         </div >
     );
 }
